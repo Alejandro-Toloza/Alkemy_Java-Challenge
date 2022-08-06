@@ -36,8 +36,7 @@ public class PersonajeEntity {
     private double peso;
     
     private String historia;
-    
-    //private boolean deleted = Boolean.FALSE;
+
     
     @ManyToMany(mappedBy = "personajes", cascade = CascadeType.ALL)
     private List<PeliculaEntity> peliculasSeries = new ArrayList<>();
