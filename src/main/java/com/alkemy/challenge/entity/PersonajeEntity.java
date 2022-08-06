@@ -37,7 +37,6 @@ public class PersonajeEntity {
     
     private String historia;
 
-    
     @ManyToMany(mappedBy = "personajes", cascade = CascadeType.ALL)
     private List<PeliculaEntity> peliculasSeries = new ArrayList<>();
     
