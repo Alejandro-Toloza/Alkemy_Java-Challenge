@@ -42,8 +42,6 @@ public class PersonajeEntity {
     @ManyToMany(mappedBy = "personajes", cascade = CascadeType.ALL)
     private List<PeliculaEntity> peliculasSeries = new ArrayList<>();
     
-    public void addPais(PeliculaEntity peliserie) {this.peliculasSeries.add(peliserie);}
-    public void removePais(PeliculaEntity peliserie) {this.peliculasSeries.remove(peliserie);}
     
     
 }

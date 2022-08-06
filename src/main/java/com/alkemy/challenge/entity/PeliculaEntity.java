@@ -62,15 +62,4 @@ public class PeliculaEntity {
     private Set<PersonajeEntity> personajes = new HashSet<>();
     
     
-    public boolean equals(Object obj){
-        if(obj == null)
-            return false;
-        if(getClass() != obj.getClass())
-            return false;
-        final PeliculaEntity other = (PeliculaEntity) obj;
-        return other.id == this.id;
-    }
-    
-    
-    
 }
