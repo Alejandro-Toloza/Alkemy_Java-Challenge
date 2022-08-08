@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
  *
  * @author alejandro
  */
+
 @Component
 public class PersonajeMapper {
     
@@ -38,20 +39,18 @@ public class PersonajeMapper {
         return personajeDTO;
 
     }
-    
-    
-    
-        public List<PersonajeDTO> personajeEntityList2DTOList(List<PersonajeEntity> entities){
+
+    public List<PersonajeDTO> personajeEntityList2DTOList(List<PersonajeEntity> entities){
         List<PersonajeDTO> dtos = new ArrayList<>();
         for(PersonajeEntity entity : entities){
             dtos.add(this.personajeEntity2DTO(entity));
         }
+        
         return dtos;
-        
-
-        
+         
         
     }
+    
     
     
     

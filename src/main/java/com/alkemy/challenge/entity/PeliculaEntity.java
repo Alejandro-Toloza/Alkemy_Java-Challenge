@@ -2,19 +2,14 @@
 package com.alkemy.challenge.entity;
 
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -42,24 +37,9 @@ public class PeliculaEntity {
     private LocalDate fechaCreacion;
     
     private double calificacion;
-    
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "genero_id", insertable = false, updatable = false)
-    private GeneroEntity genero;
-    
-    @Column(name = "genero_id", nullable = false)
-    private Long generoId;
-    
-    @ManyToMany(
-        cascade = {
-            CascadeType.PERSIST,
-            CascadeType.MERGE
-        })
-    @JoinTable(
-            name = "personaje_pelicula",
-            joinColumns = @JoinColumn(name = "pelicula_id"),
-            inverseJoinColumns = @JoinColumn(name = "personaje_id"))
-    private Set<PersonajeEntity> personajes = new HashSet<>();
+   
+    @ManyToMany(cascade = CascadeType.PERSIST)
+    private List<PersonajeEntity> personajes;
     
     
 }

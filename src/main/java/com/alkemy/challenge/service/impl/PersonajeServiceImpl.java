@@ -6,6 +6,7 @@ import com.alkemy.challenge.mapper.PersonajeMapper;
 import com.alkemy.challenge.repository.PersonajeRepository;
 import com.alkemy.challenge.service.PersonajeService;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,18 +35,33 @@ public class PersonajeServiceImpl implements PersonajeService{
 
     
     @Override
-    public List<PersonajeDTO> getAllPersonajes() {
-        
+    public List<PersonajeDTO> getAllPersonajes() {  
         List<PersonajeEntity> personajes = personajeRepository.findAll();
         List<PersonajeDTO> result = personajeMapper.personajeEntityList2DTOList(personajes);
-        return result;
-        
+        return result;        
     }
 
     @Override
     public void delete(Long id) {
         this.personajeRepository.deleteById(id);
     }
+
+    @Override
+    public PersonajeDTO getOne(Long id) {
+        
+        Optional<PersonajeEntity> entity = personajeRepository.findById(id);
+        if(!entity.isPresent()){
+            System.out.println("Id no identificado");
+        }
+        PersonajeEntity entitySave = personajeRepository.save(entity.get());
+        PersonajeDTO result = personajeMapper.personajeEntity2DTO(entitySave);
+        return result;
+        
+    }
    
+    
+ 
+     
+
     
 }

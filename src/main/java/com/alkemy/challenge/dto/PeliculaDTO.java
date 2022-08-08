@@ -22,7 +22,6 @@ public class PeliculaDTO {
     private LocalDate fechaCreacion;
     
     private double calificacion;
-     
-    private Long generoId;
+
     
 }

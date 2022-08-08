@@ -3,7 +3,6 @@ package com.alkemy.challenge.entity;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,12 +12,13 @@ import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
+
 /**
  *
  * @author alejandro
  */
 @Entity
-@Table (name = "personaje")
+@Table (name = "personajes")
 @Getter
 @Setter
 public class PersonajeEntity {
@@ -37,7 +37,7 @@ public class PersonajeEntity {
     
     private String historia;
 
-    @ManyToMany(mappedBy = "personajes", cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "personajes")
     private List<PeliculaEntity> peliculasSeries = new ArrayList<>();
     
     

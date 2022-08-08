@@ -1,10 +1,14 @@
 
 package com.alkemy.challenge.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -24,5 +28,10 @@ public class GeneroEntity {
     private Long id;
     private String nombre;
     private String imagen;
+    @OneToMany(
+        cascade = CascadeType.PERSIST
+    )
+    private List<PeliculaEntity> peliculas = new ArrayList<>();
+    
     
 }
