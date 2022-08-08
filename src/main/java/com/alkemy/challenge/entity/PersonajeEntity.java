@@ -2,7 +2,9 @@
 package com.alkemy.challenge.entity;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -38,7 +40,7 @@ public class PersonajeEntity {
     private String historia;
 
     @ManyToMany(mappedBy = "personajes")
-    private List<PeliculaEntity> peliculasSeries = new ArrayList<>();
+    private Set<PeliculaEntity> peliculasSeries = new HashSet<>();
     
     
     

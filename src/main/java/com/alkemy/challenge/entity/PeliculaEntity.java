@@ -2,7 +2,9 @@
 package com.alkemy.challenge.entity;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -38,8 +40,8 @@ public class PeliculaEntity {
     
     private double calificacion;
    
-    @ManyToMany(cascade = CascadeType.PERSIST)
-    private List<PersonajeEntity> personajes;
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private Set<PersonajeEntity> personajes = new HashSet<>();
     
     
 }
