@@ -1,6 +1,8 @@
 
 package com.alkemy.challenge.dto;
 
+import com.alkemy.challenge.entity.PeliculaEntity;
+import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -24,5 +26,8 @@ public class PersonajeDTO {
     private double peso;
     
     private String historia;
+    
+    private List<PeliculaDTO> peliculasSeries;
+
     
 }

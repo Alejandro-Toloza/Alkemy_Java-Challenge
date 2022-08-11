@@ -34,6 +34,7 @@ public class PeliculaController {
         return ResponseEntity.status(HttpStatus.CREATED).body(guardardto);
     }
     
+    
     @GetMapping
     public ResponseEntity<List<PeliculaDTO>> findAll(){
         

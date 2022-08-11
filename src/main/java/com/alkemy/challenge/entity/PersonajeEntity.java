@@ -13,6 +13,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.SQLDelete;
 
 
 /**
@@ -23,6 +24,7 @@ import lombok.Setter;
 @Table (name = "personajes")
 @Getter
 @Setter
+@SQLDelete(sql = "UPDATE personajes SET deleted = true WHERE id=?")
 public class PersonajeEntity {
     
     @Id
@@ -38,10 +40,12 @@ public class PersonajeEntity {
     private double peso;
     
     private String historia;
-
+    
+    private boolean deleted = Boolean.FALSE;
+    
     @ManyToMany(mappedBy = "personajes")
-    private Set<PeliculaEntity> peliculasSeries = new HashSet<>();
-    
-    
+    private List<PeliculaEntity> peliculasSeries = new ArrayList<>();
+ 
+    public void addPelicula(PeliculaEntity peli){this.peliculasSeries.add(peli);}
     
 }

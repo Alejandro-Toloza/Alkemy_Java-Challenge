@@ -1,6 +1,8 @@
 package com.alkemy.challenge.dto;
 
+import com.alkemy.challenge.entity.PersonajeEntity;
 import java.time.LocalDate;
+import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -23,5 +25,5 @@ public class PeliculaDTO {
     
     private double calificacion;
 
-    
+    private List<PersonajeEntity> personajes;
 }

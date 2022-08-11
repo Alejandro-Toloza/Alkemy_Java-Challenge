@@ -29,9 +29,8 @@ public class GeneroEntity {
     private Long id;
     private String nombre;
     private String imagen;
-    @OneToMany(
-        cascade = CascadeType.PERSIST
-    )
+    
+    @OneToMany()
     private List<PeliculaEntity> peliculas = new ArrayList<>();
     
     

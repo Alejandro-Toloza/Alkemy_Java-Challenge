@@ -49,11 +49,11 @@ public class PersonajeController {
     }
 
     
-    @PutMapping("/update/{id}")
+    /*@PutMapping("/update/{id}")
     public ResponseEntity<?> update(@PathVariable("id") Long id){
         PersonajeDTO dtoTraer = personajeService.getOne(id);
         return ResponseEntity.status(HttpStatus.CREATED).body(dtoTraer); 
     }
-    
+    */
     
 }

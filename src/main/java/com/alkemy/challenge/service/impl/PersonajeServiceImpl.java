@@ -29,7 +29,7 @@ public class PersonajeServiceImpl implements PersonajeService{
     public PersonajeDTO save(PersonajeDTO dto) { 
         PersonajeEntity entity = personajeMapper.personajeDTO2Entity(dto);
         PersonajeEntity entitySave = personajeRepository.save(entity);
-        PersonajeDTO dtoSave = personajeMapper.personajeEntity2DTO(entitySave);
+        PersonajeDTO dtoSave = personajeMapper.personajeEntity2DTO(entitySave, false);
         return dtoSave;   
     }
 
@@ -37,7 +37,7 @@ public class PersonajeServiceImpl implements PersonajeService{
     @Override
     public List<PersonajeDTO> getAllPersonajes() {  
         List<PersonajeEntity> personajes = personajeRepository.findAll();
-        List<PersonajeDTO> result = personajeMapper.personajeEntityList2DTOList(personajes);
+        List<PersonajeDTO> result = personajeMapper.personajeEntitySet2DTOList(personajes, false);
         return result;        
     }
 
@@ -46,18 +46,8 @@ public class PersonajeServiceImpl implements PersonajeService{
         this.personajeRepository.deleteById(id);
     }
 
-    @Override
-    public PersonajeDTO getOne(Long id) {
-        
-        Optional<PersonajeEntity> entity = personajeRepository.findById(id);
-        if(!entity.isPresent()){
-            System.out.println("Id no identificado");
-        }
-        PersonajeEntity entitySave = personajeRepository.save(entity.get());
-        PersonajeDTO result = personajeMapper.personajeEntity2DTO(entitySave);
-        return result;
-        
-    }
+   
+ 
    
     
  
