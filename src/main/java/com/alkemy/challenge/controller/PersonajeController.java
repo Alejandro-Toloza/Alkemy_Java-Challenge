@@ -27,7 +27,14 @@ public class PersonajeController {
     @Autowired
     PersonajeService personajeService;
 
-
+    
+    @GetMapping("/{id}")
+    public ResponseEntity<PersonajeDTO> getDetailsById(@PathVariable Long id){
+        PersonajeDTO dto = this.personajeService.getDetailsById(id);
+        return ResponseEntity.ok(dto);
+    }
+    
+    
     @PostMapping
     public ResponseEntity<PersonajeDTO> save(@RequestBody PersonajeDTO dto){
         

@@ -24,6 +24,16 @@ public class PersonajeServiceImpl implements PersonajeService{
     @Autowired
     PersonajeRepository personajeRepository;
     
+    @Override
+    public PersonajeDTO getDetailsById(Long id){
+        Optional<PersonajeEntity> entity = this.personajeRepository.findById(id);
+        if(!entity.isPresent()){
+            throw new UnsupportedOperationException("Id no valido.");
+        }
+        PersonajeDTO PersonajeDTO = this.personajeMapper.personajeEntity2DTO(entity.get(), true);
+        return PersonajeDTO;
+    }
+    
     
     @Override
     public PersonajeDTO save(PersonajeDTO dto) { 
@@ -45,6 +55,10 @@ public class PersonajeServiceImpl implements PersonajeService{
     public void delete(Long id) {
         this.personajeRepository.deleteById(id);
     }
+
+
+
+
 
    
  
