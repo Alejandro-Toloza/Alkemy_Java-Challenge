@@ -86,7 +86,13 @@ public class PersonajeMapper {
             return dtos;
     }
     
-    
+    public void personajeEntityRefreshValues(PersonajeEntity entity, PersonajeDTO dto){
+        entity.setImagen(dto.getImagen());
+        entity.setHistoria(dto.getHistoria());
+        entity.setEdad(dto.getEdad());
+        entity.setNombre(dto.getNombre());
+        entity.setPeso(dto.getPeso()); 
+    }
     
     
     

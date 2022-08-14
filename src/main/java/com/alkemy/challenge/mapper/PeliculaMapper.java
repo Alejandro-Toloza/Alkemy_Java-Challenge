@@ -44,6 +44,7 @@ public class PeliculaMapper {
         peliculadto.setFechaCreacion(entity.getFechaCreacion());
         if(loadPersonajes){
             List<PersonajeDTO> personajeDTOS = this.persoMapper.personajeEntitySet2DTOList(entity.getPersonajes(), false);
+            
         }
         return peliculadto;
   

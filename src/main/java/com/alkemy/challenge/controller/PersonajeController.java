@@ -4,6 +4,7 @@ package com.alkemy.challenge.controller;
 import com.alkemy.challenge.dto.PersonajeDTO;
 import com.alkemy.challenge.service.PersonajeService;
 import java.util.List;
+import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -34,17 +36,26 @@ public class PersonajeController {
         return ResponseEntity.ok(dto);
     }
     
+    @GetMapping("/filtrar")
+    public ResponseEntity<List<PersonajeDTO>> getDetailsByFilters(
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) String date,
+            @RequestParam(required = false) Set<Long> peliculas,
+            @RequestParam(required = false, defaultValue = "ASC") String order
+            ){
+        List<PersonajeDTO> personajes = this.personajeService.getByFilters(name, date, peliculas, order);
+        return ResponseEntity.ok(personajes);
+    }
+    
     
     @PostMapping
     public ResponseEntity<PersonajeDTO> save(@RequestBody PersonajeDTO dto){
-        
         PersonajeDTO guardardto = personajeService.save(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(guardardto);
     }
     
     @GetMapping
-    public ResponseEntity<List<PersonajeDTO>> findAll(){
-        
+    public ResponseEntity<List<PersonajeDTO>> getAll(){
         List<PersonajeDTO> personajes = personajeService.getAllPersonajes();
         return ResponseEntity.status(HttpStatus.CREATED).body(personajes);
     }
@@ -53,14 +64,14 @@ public class PersonajeController {
     public ResponseEntity<Void> delete(@PathVariable Long id){
         this.personajeService.delete(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-    }
+    };
 
     
-    /*@PutMapping("/update/{id}")
-    public ResponseEntity<?> update(@PathVariable("id") Long id){
-        PersonajeDTO dtoTraer = personajeService.getOne(id);
-        return ResponseEntity.status(HttpStatus.CREATED).body(dtoTraer); 
+    @PutMapping("/{id}")
+    public ResponseEntity<PersonajeDTO> update(@PathVariable Long id, @RequestBody PersonajeDTO dto){
+        PersonajeDTO result = personajeService.update(id, dto);
+        return ResponseEntity.ok().body(result); 
     }
-    */
+    
     
 }
