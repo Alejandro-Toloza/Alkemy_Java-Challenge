@@ -36,7 +36,7 @@ public class PersonajeController {
         return ResponseEntity.ok(dto);
     }
     
-    @GetMapping("/filtrar")
+    @GetMapping()
     public ResponseEntity<List<PersonajeDTO>> getDetailsByFilters(
             @RequestParam(required = false) String nombre,
             @RequestParam(required = false) String imagen,
@@ -54,13 +54,9 @@ public class PersonajeController {
         return ResponseEntity.status(HttpStatus.CREATED).body(guardardto);
     }
     
-    @GetMapping("ver")
-    public ResponseEntity<List<PersonajeDTO>> getAll(){
-        List<PersonajeDTO> personajes = personajeService.getAllPersonajes();
-        return ResponseEntity.status(HttpStatus.CREATED).body(personajes);
-    }
+
     
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id){
         this.personajeService.delete(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
