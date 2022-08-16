@@ -4,6 +4,7 @@ import com.alkemy.challenge.dto.PersonajeDTO;
 import com.alkemy.challenge.dto.PersonajeFilterDTO;
 import com.alkemy.challenge.entity.PeliculaEntity;
 import com.alkemy.challenge.entity.PersonajeEntity;
+import com.alkemy.challenge.exception.ParamNotFound;
 import com.alkemy.challenge.mapper.PersonajeMapper;
 import com.alkemy.challenge.repository.PersonajeRepository;
 import com.alkemy.challenge.repository.specification.PersonajeSpecification;
@@ -42,7 +43,7 @@ public class PersonajeServiceImpl implements PersonajeService{
     public PersonajeDTO getDetailsById(Long id){
         Optional<PersonajeEntity> entity = this.personajeRepository.findById(id);
         if(!entity.isPresent()){
-            throw new UnsupportedOperationException("Id no valido.");
+            throw new ParamNotFound("Id no valido");
         }
         PersonajeDTO PersonajeDTO = this.personajeMapper.personajeEntity2DTO(entity.get(), true);
         return PersonajeDTO;
@@ -50,8 +51,8 @@ public class PersonajeServiceImpl implements PersonajeService{
 
     
     @Override
-    public List<PersonajeDTO> getByFilters(String name, String date, Set<Long> peliculas, String order){
-        PersonajeFilterDTO filtersDTO = new PersonajeFilterDTO(name, date, peliculas, order);
+    public List<PersonajeDTO> getByFilters(String nombre, String imagen, Set<Long> peliculas, String order){
+        PersonajeFilterDTO filtersDTO = new PersonajeFilterDTO(nombre, imagen, peliculas, order);
         List<PersonajeEntity> entities = this.personajeRepository.findAll(this.persoSpecification.getByFilters(filtersDTO));
         List<PersonajeDTO> dtos = this.personajeMapper.personajeEntitySet2DTOList(entities, true);
         return dtos;

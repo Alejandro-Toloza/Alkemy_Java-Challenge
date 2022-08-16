@@ -29,19 +29,19 @@ public class PersonajeSpecification {
             
             List<Predicate> predicates = new ArrayList<>();
             
-            if(StringUtils.hasLength(filtersDTO.getName())){
+            if(StringUtils.hasLength(filtersDTO.getNombre())){
                 predicates.add(
                         criteriaBuilder.like(
-                                criteriaBuilder.lower(root.get("name")),
-                                "%" + filtersDTO.getName().toLowerCase() + "%"
+                                criteriaBuilder.lower(root.get("nombre")),
+                                "%" + filtersDTO.getNombre().toLowerCase() + "%"
                                 )
                 );
             }
             
-            if(StringUtils.hasLength(filtersDTO.getDate())){
+            if(StringUtils.hasLength(filtersDTO.getImagen())){
                 predicates.add(
-                        criteriaBuilder.like(criteriaBuilder.lower(root.get("date")),
-                                "%" + filtersDTO.getDate().toLowerCase() + "%"
+                        criteriaBuilder.like(criteriaBuilder.lower(root.get("imagen")),
+                                "%" + filtersDTO.getImagen().toLowerCase() + "%"
                                 )
                 );
             }
@@ -56,7 +56,7 @@ public class PersonajeSpecification {
             
             query.distinct(true);
             
-            String orderByField = "name";
+            String orderByField = "nombre";
             
             query.orderBy(filtersDTO.isASC() ? 
                             criteriaBuilder.asc(root.get(orderByField)) :

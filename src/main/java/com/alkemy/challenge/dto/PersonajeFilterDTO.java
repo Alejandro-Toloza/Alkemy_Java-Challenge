@@ -14,14 +14,14 @@ import lombok.Setter;
 @Setter
 public class PersonajeFilterDTO {
     
-    private String name;
-    private String date;
+    private String nombre;
+    private String imagen;
     private Set<Long> peliculas;
     private String order;
 
-    public PersonajeFilterDTO(String name, String date, Set<Long> peliculas, String order) {
-        this.name = name;
-        this.date = date;
+    public PersonajeFilterDTO(String nombre, String imagen, Set<Long> peliculas, String order) {
+        this.nombre = nombre;
+        this.imagen = imagen;
         this.peliculas = peliculas;
         this.order = order;
     }

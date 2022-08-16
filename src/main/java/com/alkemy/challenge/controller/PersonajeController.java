@@ -38,12 +38,12 @@ public class PersonajeController {
     
     @GetMapping("/filtrar")
     public ResponseEntity<List<PersonajeDTO>> getDetailsByFilters(
-            @RequestParam(required = false) String name,
-            @RequestParam(required = false) String date,
+            @RequestParam(required = false) String nombre,
+            @RequestParam(required = false) String imagen,
             @RequestParam(required = false) Set<Long> peliculas,
             @RequestParam(required = false, defaultValue = "ASC") String order
             ){
-        List<PersonajeDTO> personajes = this.personajeService.getByFilters(name, date, peliculas, order);
+        List<PersonajeDTO> personajes = this.personajeService.getByFilters(nombre, imagen, peliculas, order);
         return ResponseEntity.ok(personajes);
     }
     
@@ -54,7 +54,7 @@ public class PersonajeController {
         return ResponseEntity.status(HttpStatus.CREATED).body(guardardto);
     }
     
-    @GetMapping
+    @GetMapping("ver")
     public ResponseEntity<List<PersonajeDTO>> getAll(){
         List<PersonajeDTO> personajes = personajeService.getAllPersonajes();
         return ResponseEntity.status(HttpStatus.CREATED).body(personajes);
