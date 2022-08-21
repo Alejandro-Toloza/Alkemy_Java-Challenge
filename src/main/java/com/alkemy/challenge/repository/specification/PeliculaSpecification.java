@@ -2,15 +2,10 @@ package com.alkemy.challenge.repository.specification;
 
 import com.alkemy.challenge.dto.PeliculaFilterDTO;
 import com.alkemy.challenge.entity.PeliculaEntity;
-import com.alkemy.challenge.entity.PersonajeEntity;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
-import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
-import javax.persistence.criteria.Expression;
-import javax.persistence.criteria.Join;
-import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Predicate;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,20 +25,12 @@ public class PeliculaSpecification {
                 );
             }
 
-            if(StringUtils.hasLength(filtersDTO.getImagen())){
+            if(StringUtils.hasLength(filtersDTO.getGenero())) {
+                Long generoId = Long.parseLong(filtersDTO.getGenero());
                 predicates.add(
-                        criteriaBuilder.like(criteriaBuilder.lower(root.get("imagen")),
-                                "%" + filtersDTO.getImagen().toLowerCase() + "%"
-                        )
+                        criteriaBuilder.equal(root.get("genero"), generoId)
                 );
             }
-
-            if(!CollectionUtils.isEmpty(filtersDTO.getPersonajes())){
-                Join<PersonajeEntity, PeliculaEntity> join = root.join("personajes", JoinType.INNER);
-                Expression<String> personajesId = join.get("id");
-                predicates.add(personajesId.in(filtersDTO.getPersonajes()));
-            }
-
 
 
             query.distinct(true);

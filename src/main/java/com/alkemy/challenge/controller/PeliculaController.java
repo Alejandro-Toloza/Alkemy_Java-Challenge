@@ -4,7 +4,7 @@ package com.alkemy.challenge.controller;
 import com.alkemy.challenge.dto.PeliculaDTO;
 import com.alkemy.challenge.service.PeliculaService;
 import java.util.List;
-import java.util.Set;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("movies")
 public class PeliculaController {
-    
     
     @Autowired
     PeliculaService peliService;
@@ -39,11 +38,10 @@ public class PeliculaController {
     @GetMapping()
     public ResponseEntity<List<PeliculaDTO>> getDetailsByFilters(
             @RequestParam(required = false) String titulo,
-            @RequestParam(required = false) String imagen,
-            @RequestParam(required = false) Set<Long> personajes,
+            @RequestParam(required = false) String genero,
             @RequestParam(required = false, defaultValue = "ASC") String order
     ){
-        List<PeliculaDTO> peliculas = this.peliService.getByFilters(titulo, imagen, personajes, order);
+        List<PeliculaDTO> peliculas = this.peliService.getByFilters(titulo, genero, order);
         return ResponseEntity.ok(peliculas);
     }
     

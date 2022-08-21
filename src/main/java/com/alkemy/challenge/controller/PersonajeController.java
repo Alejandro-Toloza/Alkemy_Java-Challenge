@@ -38,11 +38,11 @@ public class PersonajeController {
     @GetMapping()
     public ResponseEntity<List<PersonajeDTO>> getDetailsByFilters(
             @RequestParam(required = false) String nombre,
-            @RequestParam(required = false) String imagen,
-            @RequestParam(required = false) Set<Long> peliculas,
+            @RequestParam(required = false) Integer edad,
+            @RequestParam(required = false) List<Long> peliculasSeries,
             @RequestParam(required = false, defaultValue = "ASC") String order
             ){
-        List<PersonajeDTO> personajes = this.personajeService.getByFilters(nombre, imagen, peliculas, order);
+        List<PersonajeDTO> personajes = this.personajeService.getByFilters(nombre, edad, peliculasSeries, order);
         return ResponseEntity.ok(personajes);
     }
     @PostMapping

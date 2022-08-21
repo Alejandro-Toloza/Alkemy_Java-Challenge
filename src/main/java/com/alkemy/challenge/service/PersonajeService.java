@@ -14,11 +14,10 @@ import java.util.Set;
 public interface PersonajeService {
     
     PersonajeDTO save(PersonajeDTO dto);
-    List<PersonajeDTO> getAllPersonajes();
     void delete(Long id);
     PersonajeDTO getDetailsById(Long id);
     PersonajeDTO update(Long id, PersonajeDTO dto);
-    List<PersonajeDTO> getByFilters(String name, String date, Set<Long> peliculas, String order);
+    List<PersonajeDTO> getByFilters(String nombre, Integer edad, List<Long> peliculasSeries, String order);
      
     
 }

@@ -1,6 +1,7 @@
 
 package com.alkemy.challenge.dto;
 
+
 import java.util.List;
 import java.util.Set;
 import lombok.Getter;
@@ -15,14 +16,15 @@ import lombok.Setter;
 public class PersonajeFilterDTO {
     
     private String nombre;
-    private String imagen;
-    private Set<Long> peliculas;
+    private Integer edad;
+    private List<Long> peliculasSeries;
     private String order;
 
-    public PersonajeFilterDTO(String nombre, String imagen, Set<Long> peliculas, String order) {
+    public PersonajeFilterDTO(String nombre, Integer edad, List<Long> peliculasSeries, String order) {
+
         this.nombre = nombre;
-        this.imagen = imagen;
-        this.peliculas = peliculas;
+        this.edad = edad;
+        this.peliculasSeries = peliculasSeries;
         this.order = order;
     }
     

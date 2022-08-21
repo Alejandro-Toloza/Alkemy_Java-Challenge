@@ -11,7 +11,7 @@ import com.alkemy.challenge.repository.specification.PeliculaSpecification;
 import com.alkemy.challenge.service.PeliculaService;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,12 +36,6 @@ public class PeliculaServiceImpl implements PeliculaService{
         PeliculaEntity saveEntity = peliRepo.save(entity);
         PeliculaDTO result = mapper.peliculaEntity2DTO(saveEntity, false);
         return result;
-    }
-
-    public List<PeliculaDTO> getAllPeliculas() {  
-        List<PeliculaEntity> peliculas = peliRepo.findAll();
-        List<PeliculaDTO> result = mapper.peliculaEntityList2DTOList(peliculas, true);
-        return result;        
     }
 
     public void delete(Long id) {
@@ -71,8 +65,8 @@ public class PeliculaServiceImpl implements PeliculaService{
     }
 
     @Override
-    public List<PeliculaDTO> getByFilters(String titulo, String imagen, Set<Long> personajes, String order) {
-        PeliculaFilterDTO filtersDTO = new PeliculaFilterDTO(titulo, imagen, personajes, order);
+    public List<PeliculaDTO> getByFilters(String titulo, String genero, String order) {
+        PeliculaFilterDTO filtersDTO = new PeliculaFilterDTO(titulo, genero, order);
         List<PeliculaEntity> entities = this.peliRepo.findAll(this.peliculaSpecification.getByFilters(filtersDTO));
         List<PeliculaDTO> dtos = this.mapper.peliculaEntitySet2DTOList(entities, true);
         return dtos;

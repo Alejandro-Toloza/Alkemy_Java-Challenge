@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -42,8 +41,8 @@ public class PersonajeServiceImpl implements PersonajeService{
         return PersonajeDTO;
     }
     @Override
-    public List<PersonajeDTO> getByFilters(String nombre, String imagen, Set<Long> peliculas, String order) {
-        PersonajeFilterDTO filtersDTO = new PersonajeFilterDTO(nombre, imagen, peliculas, order);
+    public List<PersonajeDTO> getByFilters(String nombre, Integer edad, List<Long> peliculasSeries, String order) {
+        PersonajeFilterDTO filtersDTO = new PersonajeFilterDTO(nombre, edad, peliculasSeries, order);
         List<PersonajeEntity> entities = this.personajeRepository.findAll(this.persoSpecification.getByFilters(filtersDTO));
         List<PersonajeDTO> dtos = this.personajeMapper.personajeEntitySet2DTOList(entities, true);
 
@@ -57,16 +56,12 @@ public class PersonajeServiceImpl implements PersonajeService{
         PersonajeDTO dtoSave = personajeMapper.personajeEntity2DTO(entitySave, false);
         return dtoSave;   
     }
-    @Override
-    public List<PersonajeDTO> getAllPersonajes() {  
-        List<PersonajeEntity> personajes = personajeRepository.findAll();
-        List<PersonajeDTO> result = personajeMapper.personajeEntitySet2DTOList(personajes, true);
-        return result;        
-    }
+
     @Override
     public void delete(Long id) {
         this.personajeRepository.deleteById(id);
     }
+
     @Override
     public PersonajeDTO update(Long id, PersonajeDTO dto){
         Optional<PersonajeEntity> entity = personajeRepository.findById(id);

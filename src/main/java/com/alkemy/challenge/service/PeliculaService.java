@@ -14,10 +14,9 @@ import java.util.Set;
 public interface PeliculaService {
     
     PeliculaDTO save(PeliculaDTO dto);
-    List<PeliculaDTO> getAllPeliculas();
     void delete(Long id);
     PeliculaDTO getDetailsById(Long id);
     PeliculaDTO update(Long id, PeliculaDTO dto);
-    List<PeliculaDTO> getByFilters(String titulo, String date, Set<Long> personajes, String order);
+    List<PeliculaDTO> getByFilters(String titulo, String genero, String order);
     
 }

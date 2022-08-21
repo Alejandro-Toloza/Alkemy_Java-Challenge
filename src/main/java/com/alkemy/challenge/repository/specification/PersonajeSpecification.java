@@ -37,19 +37,17 @@ public class PersonajeSpecification {
                                 )
                 );
             }
-            
-            if(StringUtils.hasLength(filtersDTO.getImagen())){
+
+            if (filtersDTO.getEdad() != null) {
                 predicates.add(
-                        criteriaBuilder.like(criteriaBuilder.lower(root.get("imagen")),
-                                "%" + filtersDTO.getImagen().toLowerCase() + "%"
-                                )
+                        criteriaBuilder.equal(root.get("edad"), filtersDTO.getEdad())
                 );
             }
             
-            if(!CollectionUtils.isEmpty(filtersDTO.getPeliculas())){
-                Join<PeliculaEntity, PersonajeEntity> join = root.join("peliculas", JoinType.INNER);
+            if(!CollectionUtils.isEmpty(filtersDTO.getPeliculasSeries())){
+                Join<PeliculaEntity, PersonajeEntity> join = root.join("peliculasSeries", JoinType.INNER);
                 Expression<String> peliculasId = join.get("id");
-                predicates.add(peliculasId.in(filtersDTO.getPeliculas()));
+                predicates.add(peliculasId.in(filtersDTO.getPeliculasSeries()));
             }
             
             
