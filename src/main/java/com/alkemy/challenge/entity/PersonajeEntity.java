@@ -48,6 +48,5 @@ public class PersonajeEntity {
     @ManyToMany(mappedBy = "personajes")
     private List<PeliculaEntity> peliculasSeries = new ArrayList<>();
  
-    public void addPelicula(PeliculaEntity peli){this.peliculasSeries.add(peli);}
-    
+
 }

@@ -4,16 +4,12 @@ package com.alkemy.challenge.controller;
 import com.alkemy.challenge.dto.PeliculaDTO;
 import com.alkemy.challenge.service.PeliculaService;
 import java.util.List;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  *
@@ -21,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 
 @RestController
-@RequestMapping("peliculas")
+@RequestMapping("movies")
 public class PeliculaController {
     
     
@@ -34,12 +30,29 @@ public class PeliculaController {
         return ResponseEntity.status(HttpStatus.CREATED).body(guardardto);
     }
     
-    
-    @GetMapping
+
+   /* @GetMapping("/all")
     public ResponseEntity<List<PeliculaDTO>> findAll(){
         
         List<PeliculaDTO> personajes = peliService.getAllPeliculas();
         return ResponseEntity.status(HttpStatus.CREATED).body(personajes);
+    }
+    */
+    @GetMapping("/{id}")
+    public ResponseEntity<PeliculaDTO> getDetailsById(@PathVariable Long id){
+        PeliculaDTO dto = this.peliService.getDetailsById(id);
+        return ResponseEntity.ok(dto);
+    }
+
+    @GetMapping()
+    public ResponseEntity<List<PeliculaDTO>> getDetailsByFilters(
+            @RequestParam(required = false) String titulo,
+            @RequestParam(required = false) String imagen,
+            @RequestParam(required = false) Set<Long> personajes,
+            @RequestParam(required = false, defaultValue = "ASC") String order
+    ){
+        List<PeliculaDTO> peliculas = this.peliService.getByFilters(titulo, imagen, personajes, order);
+        return ResponseEntity.ok(peliculas);
     }
     
     @DeleteMapping("/delete/{id}")
@@ -47,6 +60,11 @@ public class PeliculaController {
         this.peliService.delete(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
-    
-    
+
+    @PutMapping("/{id}")
+    public ResponseEntity<PeliculaDTO> update(@PathVariable Long id, @RequestBody PeliculaDTO dto){
+        PeliculaDTO result = peliService.update(id, dto);
+        return ResponseEntity.ok().body(result);
+    }
+
 }

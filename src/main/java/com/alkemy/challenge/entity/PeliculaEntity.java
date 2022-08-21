@@ -6,18 +6,12 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
+
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 import org.springframework.format.annotation.DateTimeFormat;
 
 /**
@@ -25,8 +19,10 @@ import org.springframework.format.annotation.DateTimeFormat;
  * @author alejandro
  */
 @Entity
-@Table(name = "pelicula")
+@Table(name = "movies")
 @Getter @Setter
+@SQLDelete(sql = "UPDATE pelicula SET deleted = true WHERE id=?")
+@Where(clause = "deleted=false")
 public class PeliculaEntity {
     
     @Id
@@ -42,12 +38,14 @@ public class PeliculaEntity {
     private LocalDate fechaCreacion;
     
     private double calificacion;
-   
+
+    private boolean deleted = Boolean.FALSE;
+
     @ManyToOne()
     @JoinColumn(name = "genero_id")
     private GeneroEntity genero;
     
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<PersonajeEntity> personajes = new ArrayList<>();
     
     

@@ -23,12 +23,11 @@ import org.springframework.web.bind.annotation.RestController;
  * @author alejandro
  */
 @RestController
-@RequestMapping("personajes")
+@RequestMapping("characters")
 public class PersonajeController {
     
     @Autowired
     PersonajeService personajeService;
-
     
     @GetMapping("/{id}")
     public ResponseEntity<PersonajeDTO> getDetailsById(@PathVariable Long id){
@@ -46,16 +45,12 @@ public class PersonajeController {
         List<PersonajeDTO> personajes = this.personajeService.getByFilters(nombre, imagen, peliculas, order);
         return ResponseEntity.ok(personajes);
     }
-    
-    
     @PostMapping
     public ResponseEntity<PersonajeDTO> save(@RequestBody PersonajeDTO dto){
         PersonajeDTO guardardto = personajeService.save(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(guardardto);
     }
-    
 
-    
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id){
         this.personajeService.delete(id);

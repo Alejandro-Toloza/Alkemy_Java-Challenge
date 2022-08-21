@@ -53,7 +53,9 @@ public class PersonajeMapper {
         return personajeDTO;
 
     }
-    
+
+
+
     public Set<PersonajeEntity> personajeDTOList2Entity(List<PersonajeDTO> dtos){
         Set<PersonajeEntity> entities = new HashSet<>();
         for (PersonajeDTO dto : dtos){
@@ -73,7 +75,7 @@ public class PersonajeMapper {
          
     }
     
-    public List<PersonajeBasicDTO> personajeEntitySetBasicDTOList(Collection<PersonajeEntity> entities){
+    public List<PersonajeBasicDTO> personajeEntitySetBasicDTOList(Collection<PersonajeEntity> entities, boolean loadPeliculas){
             List<PersonajeBasicDTO> dtos = new ArrayList<>();
             PersonajeBasicDTO basicDTO;
             for(PersonajeEntity entity: entities){
