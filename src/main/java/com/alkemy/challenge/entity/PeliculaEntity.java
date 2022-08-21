@@ -19,7 +19,7 @@ import org.springframework.format.annotation.DateTimeFormat;
  * @author alejandro
  */
 @Entity
-@Table(name = "movies")
+@Table(name = "pelicula")
 @Getter @Setter
 @SQLDelete(sql = "UPDATE pelicula SET deleted = true WHERE id=?")
 @Where(clause = "deleted=false")

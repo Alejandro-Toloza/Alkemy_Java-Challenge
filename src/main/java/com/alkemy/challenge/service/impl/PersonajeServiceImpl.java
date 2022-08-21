@@ -42,11 +42,13 @@ public class PersonajeServiceImpl implements PersonajeService{
         return PersonajeDTO;
     }
     @Override
-    public List<PersonajeDTO> getByFilters(String nombre, String imagen, Set<Long> peliculas, String order){
+    public List<PersonajeDTO> getByFilters(String nombre, String imagen, Set<Long> peliculas, String order) {
         PersonajeFilterDTO filtersDTO = new PersonajeFilterDTO(nombre, imagen, peliculas, order);
         List<PersonajeEntity> entities = this.personajeRepository.findAll(this.persoSpecification.getByFilters(filtersDTO));
         List<PersonajeDTO> dtos = this.personajeMapper.personajeEntitySet2DTOList(entities, true);
+
         return dtos;
+
     }
     @Override
     public PersonajeDTO save(PersonajeDTO dto) { 

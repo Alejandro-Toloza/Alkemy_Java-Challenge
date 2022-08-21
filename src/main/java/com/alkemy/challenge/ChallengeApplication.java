@@ -24,6 +24,7 @@ public class ChallengeApplication {
 		return new BCryptPasswordEncoder();
 	}
 
+	/*
 	@Bean
 	CommandLineRunner run(UserService userService) {
 		return args -> {
@@ -45,5 +46,6 @@ public class ChallengeApplication {
 			userService.addRoleToUser("user900", "ROLE_USER");
 		};
 	}
+	*/
 
 }

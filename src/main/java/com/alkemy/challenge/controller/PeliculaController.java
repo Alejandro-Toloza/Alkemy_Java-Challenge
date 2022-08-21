@@ -29,15 +29,7 @@ public class PeliculaController {
         PeliculaDTO guardardto = peliService.save(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(guardardto);
     }
-    
 
-   /* @GetMapping("/all")
-    public ResponseEntity<List<PeliculaDTO>> findAll(){
-        
-        List<PeliculaDTO> personajes = peliService.getAllPeliculas();
-        return ResponseEntity.status(HttpStatus.CREATED).body(personajes);
-    }
-    */
     @GetMapping("/{id}")
     public ResponseEntity<PeliculaDTO> getDetailsById(@PathVariable Long id){
         PeliculaDTO dto = this.peliService.getDetailsById(id);
@@ -55,7 +47,7 @@ public class PeliculaController {
         return ResponseEntity.ok(peliculas);
     }
     
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id){
         this.peliService.delete(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
